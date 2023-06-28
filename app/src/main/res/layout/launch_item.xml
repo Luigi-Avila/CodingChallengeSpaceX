@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/common_padding_min"
+    style="@style/Widget.Material3.CardView.Elevated"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/common_padding_min">
+
+        <ImageView
+            android:id="@+id/imgCardPhoto"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:importantForAccessibility="no"
+            app:layout_constraintDimensionRatio="H, 4:3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNameLaunch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imgCardPhoto"
+            app:layout_constraintStart_toEndOf="@id/imgCardPhoto"
+            app:layout_constraintBottom_toTopOf="@id/tvDateTime"
+            tools:text="Nombre de la mision de lanzamiento"
+            android:layout_marginStart="@dimen/common_padding_min"
+            />
+
+        <TextView
+            android:id="@+id/tvDateTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvNameLaunch"
+            app:layout_constraintTop_toBottomOf="@id/tvNameLaunch"
+            app:layout_constraintBottom_toBottomOf="@id/imgCardPhoto"
+            tools:text="Launch date time" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
