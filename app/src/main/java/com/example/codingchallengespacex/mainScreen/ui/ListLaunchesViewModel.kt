@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.codingchallengespacex.core.utils.ResultGetListLaunches
+import com.example.codingchallengespacex.core.utils.ResultGetLaunches
 import com.example.codingchallengespacex.mainScreen.data.models.ListLaunches
 import com.example.codingchallengespacex.mainScreen.domain.useCase.GetListLaunchesUseCase
 import kotlinx.coroutines.launch
@@ -20,10 +20,10 @@ class ListLaunchesViewModel : ViewModel() {
     fun getListLaunches() {
         viewModelScope.launch {
             when (val result = getListLaunchesUseCase()) {
-                is ResultGetListLaunches.Error -> {
+                is ResultGetLaunches.Error -> {
                     Log.i("RESULTAPI", "ERRooorrr ${result.message}")
                 }
-                is ResultGetListLaunches.Success -> {
+                is ResultGetLaunches.Success -> {
                     Log.i("RESULTAPI", "SUCCESSS ${result.data}")
                     _listLaunch.value = result.data
                 }
