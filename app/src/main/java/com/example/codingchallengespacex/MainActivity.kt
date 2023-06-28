@@ -2,39 +2,32 @@ package com.example.codingchallengespacex
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.codingchallengespacex.databinding.ActivityMainBinding
-import com.example.codingchallengespacex.mainScreen.ui.ListLaunchesAdapter
-import com.example.codingchallengespacex.mainScreen.ui.ListLaunchesViewModel
-import com.example.codingchallengespacex.mainScreen.ui.OnClickListener
+import com.example.codingchallengespacex.mainScreen.ui.adapter.IOnclickItemRecyclerView
 
-class MainActivity : AppCompatActivity(), OnClickListener {
-
-    private val listLaunchesViewModel: ListLaunchesViewModel by viewModels()
+class MainActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        listLaunchesViewModel.getListLaunches()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
 
-        listLaunchesViewModel.listLaunch.observe(this, Observer {
 
-            mBinding.recyclerView.adapter = ListLaunchesAdapter(it!!, this)
-            mBinding.recyclerView.layoutManager = LinearLayoutManager(this)
-            mBinding.recyclerView.setHasFixedSize(true)
-        })
+        /*setupActionBarWithNavController(navController)*/
     }
 
-    override fun onClick(launchId: String) {
-        Toast.makeText(this, "this is the id of the launch $launchId", Toast.LENGTH_LONG).show()
-    }
+    /*override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }*/
 }

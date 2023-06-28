@@ -1,4 +1,4 @@
-package com.example.codingchallengespacex.mainScreen.ui
+package com.example.codingchallengespacex.mainScreen.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +13,7 @@ import java.util.Locale
 
 class ListLaunchesAdapter(
     private val launchesList: ListLaunches,
-    private val listener: OnClickListener
+    private val listener: IOnclickItemRecyclerView
 ) :
     RecyclerView.Adapter<ListLaunchesAdapter.LaunchesViewHolder>() {
 
