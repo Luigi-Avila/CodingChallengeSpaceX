@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/common_padding_min"
     style="@style/Widget.Material3.CardView.Elevated"
+    android:layout_marginTop="@dimen/common_padding_min"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +21,9 @@
             android:importantForAccessibility="no"
             app:layout_constraintDimensionRatio="H, 4:3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/spacex_logo"
+            />
 
         <TextView
             android:id="@+id/tvNameLaunch"

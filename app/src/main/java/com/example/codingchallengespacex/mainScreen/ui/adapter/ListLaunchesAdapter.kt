@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.codingchallengespacex.R
+import com.example.codingchallengespacex.core.utils.dateTimeFormat
 import com.example.codingchallengespacex.databinding.LaunchItemBinding
 import com.example.codingchallengespacex.mainScreen.data.models.ListLaunches
 import com.squareup.picasso.Picasso
@@ -49,10 +50,4 @@ class ListLaunchesAdapter(
 
     }
 
-    private fun String.dateTimeFormat(): String? {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-        val outputFormat = SimpleDateFormat("M/d/yyyy h:mm a", Locale.getDefault())
-        val date = inputFormat.parse(this)
-        return date?.let { outputFormat.format(it) }
-    }
 }

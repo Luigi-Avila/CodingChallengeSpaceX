@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.codingchallengespacex.R
+import com.example.codingchallengespacex.core.utils.dateTimeFormat
 import com.example.codingchallengespacex.databinding.FragmentDetailBinding
+import com.squareup.picasso.Picasso
 
 class DetailFragment : Fragment() {
 
@@ -36,12 +39,14 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        mBinding.tvLaunchId.text = launchId
-
-        mBinding.btnNavigationDetail.setOnClickListener {
-            findNavController().navigate(R.id.action_detailFragment2_to_mainScreenFragment)
-        }
+        detailViewModel.launch.observe(viewLifecycleOwner, Observer {
+            it?.let { launchData ->
+                mBinding.tvDetailName.text = launchData.name
+                mBinding.tvDetailTextDescription.text = launchData.details
+                mBinding.tvDetailDate.text = launchData.date_utc.dateTimeFormat()
+                Picasso.get().load(launchData.links.patch.large).into(mBinding.imgMissionPhoto)
+            }
+        })
     }
 
 }
