@@ -9,9 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codingchallengespacex.R
 import com.example.codingchallengespacex.core.utils.dateTimeFormat
 import com.example.codingchallengespacex.databinding.FragmentDetailBinding
+import com.example.codingchallengespacex.detailScreen.ui.adapter.ListLaunchImagesAdapter
 import com.squareup.picasso.Picasso
 
 class DetailFragment : Fragment() {
@@ -45,8 +47,17 @@ class DetailFragment : Fragment() {
                 mBinding.tvDetailTextDescription.text = launchData.details
                 mBinding.tvDetailDate.text = launchData.date_utc.dateTimeFormat()
                 Picasso.get().load(launchData.links.patch.large).into(mBinding.imgMissionPhoto)
+
+                setupRecyclerView(launchData.links.flickr.original)
             }
         })
+    }
+
+    private fun setupRecyclerView(images: List<String>) {
+        mBinding.recyclerViewImages.apply {
+            adapter = ListLaunchImagesAdapter(images)
+            layoutManager = LinearLayoutManager(context)
+        }
     }
 
 }

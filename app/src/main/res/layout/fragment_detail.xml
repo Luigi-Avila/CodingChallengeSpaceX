@@ -51,6 +51,7 @@
             />
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardLaunchDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/imgMissionPhoto"
@@ -102,8 +103,29 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <TextView
+            android:id="@+id/tvTitleGallery"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Gallery"
+            app:layout_constraintTop_toBottomOf="@id/cardLaunchDescription"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/common_padding_default"
 
+            />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewImages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleGallery"
+            android:layout_marginTop="@dimen/common_padding_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/launch_image_item"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
