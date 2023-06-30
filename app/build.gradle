@@ -40,6 +40,7 @@ android {
 def lifecycle_version = "2.6.1"
 def activity_version = "1.7.2"
 def nav_version = "2.6.0"
+def koin_android_version = "3.3.2"
 
 dependencies {
 
@@ -67,6 +68,16 @@ dependencies {
     // NavGraph
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //Koin
+    implementation "io.insert-koin:koin-android:$koin_android_version"
+
+    // Java Compatibility
+    implementation "io.insert-koin:koin-android-compat:$koin_android_version"
+    // Jetpack WorkManager
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_android_version"
+    // Navigation Graph
+    implementation "io.insert-koin:koin-androidx-navigation:$koin_android_version"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

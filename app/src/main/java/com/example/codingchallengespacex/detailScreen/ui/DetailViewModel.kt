@@ -10,12 +10,10 @@ import com.example.codingchallengespacex.detailScreen.data.models.Launch
 import com.example.codingchallengespacex.detailScreen.domain.useCase.GetOneLaunchUseCase
 import kotlinx.coroutines.launch
 
-class DetailViewModel: ViewModel() {
+class DetailViewModel(private val getOneLaunchUseCase: GetOneLaunchUseCase): ViewModel() {
 
     private val _launch = MutableLiveData<Launch?>()
     val launch: LiveData<Launch?> = _launch
-
-    private val getOneLaunchUseCase = GetOneLaunchUseCase()
 
     fun getOneLaunch(launchId: String){
         viewModelScope.launch {

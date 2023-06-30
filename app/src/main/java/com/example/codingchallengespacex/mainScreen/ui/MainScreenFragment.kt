@@ -6,24 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.codingchallengespacex.R
 import com.example.codingchallengespacex.databinding.FragmentMainScreenBinding
 import com.example.codingchallengespacex.mainScreen.ui.adapter.IOnclickItemRecyclerView
 import com.example.codingchallengespacex.mainScreen.ui.adapter.ListLaunchesAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainScreenFragment : Fragment(), IOnclickItemRecyclerView {
 
     private lateinit var mBinding: FragmentMainScreenBinding
-    private val listLaunchesViewModel: ListLaunchesViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        listLaunchesViewModel.getListLaunches()
-    }
+    private val listLaunchesViewModel: ListLaunchesViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

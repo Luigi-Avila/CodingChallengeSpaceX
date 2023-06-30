@@ -10,12 +10,14 @@ import com.example.codingchallengespacex.mainScreen.data.models.ListLaunches
 import com.example.codingchallengespacex.mainScreen.domain.useCase.GetListLaunchesUseCase
 import kotlinx.coroutines.launch
 
-class ListLaunchesViewModel : ViewModel() {
+class ListLaunchesViewModel(private val getListLaunchesUseCase: GetListLaunchesUseCase) : ViewModel() {
 
     private val _listLaunch = MutableLiveData<ListLaunches?>()
     val listLaunch: LiveData<ListLaunches?> = _listLaunch
 
-    private val getListLaunchesUseCase = GetListLaunchesUseCase()
+    init {
+        getListLaunches()
+    }
 
     fun getListLaunches() {
         viewModelScope.launch {

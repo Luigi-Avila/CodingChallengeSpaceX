@@ -5,9 +5,7 @@ import com.example.codingchallengespacex.detailScreen.data.models.Launch
 import com.example.codingchallengespacex.detailScreen.data.network.OneLaunchService
 import com.example.codingchallengespacex.detailScreen.domain.repository.IOneLaunchRepository
 
-class OneLaunchRepository : IOneLaunchRepository {
-
-    private val service = OneLaunchService()
+class OneLaunchRepository(private val service: OneLaunchService) : IOneLaunchRepository {
 
     override suspend fun getOneLaunch(launchId: String): ResultGetLaunches<Launch?> =
         service.getOneLaunch(launchId)

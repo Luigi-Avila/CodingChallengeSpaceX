@@ -5,9 +5,8 @@ import com.example.codingchallengespacex.mainScreen.data.models.ListLaunches
 import com.example.codingchallengespacex.mainScreen.data.network.ListLaunchesService
 import com.example.codingchallengespacex.mainScreen.domain.repository.IListLaunchesRepository
 
-class ListLaunchesRepository: IListLaunchesRepository {
+class ListLaunchesRepository(private val service: ListLaunchesService) : IListLaunchesRepository {
 
-    private val service = ListLaunchesService()
-
-    override suspend fun getList(): ResultGetLaunches<ListLaunches> = service.getListLaunches()
+    override suspend fun getList(): ResultGetLaunches<ListLaunches> =
+        service.getListLaunches()
 }
