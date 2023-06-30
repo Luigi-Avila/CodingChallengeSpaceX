@@ -1,9 +1,9 @@
 package com.example.codingchallengespacex.core.utils
 
-import com.example.codingchallengespacex.detailScreen.data.models.LaunchDTO
-import com.example.codingchallengespacex.detailScreen.domain.models.DetailLaunch
-import com.example.codingchallengespacex.mainScreen.data.models.LaunchesItemDTO
-import com.example.codingchallengespacex.mainScreen.domain.models.LaunchItem
+import com.example.codingchallengespacex.detailscreen.data.models.LaunchDTO
+import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch
+import com.example.codingchallengespacex.mainscreen.data.models.LaunchesItemDTO
+import com.example.codingchallengespacex.mainscreen.domain.models.LaunchItem
 
 fun LaunchesItemDTO.toDomain(): LaunchItem {
     return LaunchItem(

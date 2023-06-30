@@ -1,7 +1,7 @@
 package com.example.codingchallengespacex.core.di
 
-import com.example.codingchallengespacex.detailScreen.domain.useCase.GetOneLaunchUseCase
-import com.example.codingchallengespacex.mainScreen.domain.useCase.GetListLaunchesUseCase
+import com.example.codingchallengespacex.detailscreen.domain.useCase.GetOneLaunchUseCase
+import com.example.codingchallengespacex.mainscreen.domain.useCase.GetListLaunchesUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {

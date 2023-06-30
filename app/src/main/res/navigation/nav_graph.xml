@@ -6,7 +6,7 @@
     app:startDestination="@id/mainScreenFragment">
     <fragment
         android:id="@+id/detailFragment2"
-        android:name="com.example.codingchallengespacex.detailScreen.ui.DetailFragment"
+        android:name="com.example.codingchallengespacex.detailscreen.ui.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
-        android:name="com.example.codingchallengespacex.mainScreen.ui.MainScreenFragment"
+        android:name="com.example.codingchallengespacex.mainscreen.ui.MainScreenFragment"
         android:label="fragment_main_screen"
         tools:layout="@layout/fragment_main_screen" >
         <action

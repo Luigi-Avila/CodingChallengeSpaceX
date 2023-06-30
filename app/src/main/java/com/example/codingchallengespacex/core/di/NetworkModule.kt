@@ -1,7 +1,7 @@
 package com.example.codingchallengespacex.core.di
 
-import com.example.codingchallengespacex.detailScreen.data.network.OneLaunchClient
-import com.example.codingchallengespacex.mainScreen.data.network.ListLaunchesClient
+import com.example.codingchallengespacex.detailscreen.data.network.OneLaunchClient
+import com.example.codingchallengespacex.mainscreen.data.network.ListLaunchesClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
