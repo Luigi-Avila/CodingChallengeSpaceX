@@ -5,15 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.codingchallengespacex.R
-import com.example.codingchallengespacex.core.utils.dateTimeFormat
 import com.example.codingchallengespacex.databinding.LaunchItemBinding
-import com.example.codingchallengespacex.mainScreen.data.models.ListLaunches
+import com.example.codingchallengespacex.mainScreen.domain.models.LaunchItem
 import com.squareup.picasso.Picasso
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 class ListLaunchesAdapter(
-    private val launchesList: ListLaunches,
+    private val launchesList: List<LaunchItem>,
     private val listener: IOnclickItemRecyclerView
 ) :
     RecyclerView.Adapter<ListLaunchesAdapter.LaunchesViewHolder>() {
@@ -30,10 +27,11 @@ class ListLaunchesAdapter(
         with(holder) {
             setListener(data.id)
             binding.tvNameLaunch.text = data.name
-            Picasso.get()
-                .load(data.links.patch.small)
+           Picasso.get()
+                .load(data.image)
+                .placeholder(R.drawable.spacex_logo)
                 .into(binding.imgCardPhoto)
-            binding.tvDateTime.text = data.date_utc.dateTimeFormat()
+            binding.tvDateTime.text = data.date_utc
         }
     }
 

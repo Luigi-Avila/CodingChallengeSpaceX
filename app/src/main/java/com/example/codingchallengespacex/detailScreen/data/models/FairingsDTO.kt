@@ -1,6 +1,6 @@
 package com.example.codingchallengespacex.detailScreen.data.models
 
-data class Fairings(
+data class FairingsDTO(
     val recovered: Boolean,
     val recovery_attempt: Boolean,
     val reused: Boolean,

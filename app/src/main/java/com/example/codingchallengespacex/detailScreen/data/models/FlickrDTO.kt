@@ -1,6 +1,6 @@
 package com.example.codingchallengespacex.detailScreen.data.models
 
-data class Flickr(
+data class FlickrDTO(
     val original: List<String>,
     val small: List<Any>
 )

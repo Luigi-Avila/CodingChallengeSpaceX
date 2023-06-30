@@ -1,11 +1,11 @@
 package com.example.codingchallengespacex.detailScreen.data.models
 
-data class Links(
+data class LinksDTO(
     val article: String,
-    val flickr: Flickr,
-    val patch: Patch,
+    val flickr: FlickrDTO,
+    val patch: PatchDTO,
     val presskit: Any,
-    val reddit: Reddit,
+    val reddit: RedditDTO,
     val webcast: String,
     val wikipedia: String,
     val youtube_id: String

@@ -1,6 +1,6 @@
 package com.example.codingchallengespacex.detailScreen.data.models
 
-data class Core(
+data class CoreDTO(
     val core: String,
     val flight: Int,
     val gridfins: Boolean,

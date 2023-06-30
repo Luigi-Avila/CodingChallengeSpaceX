@@ -9,9 +9,6 @@
         android:name="com.example.codingchallengespacex.detailScreen.ui.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
-        <action
-            android:id="@+id/action_detailFragment2_to_mainScreenFragment"
-            app:destination="@id/mainScreenFragment" />
         <argument
             android:name="launchId"
             app:argType="string" />

@@ -6,30 +6,38 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.codingchallengespacex.core.utils.ResultGetLaunches
-import com.example.codingchallengespacex.mainScreen.data.models.ListLaunches
+import com.example.codingchallengespacex.mainScreen.domain.models.LaunchItem
 import com.example.codingchallengespacex.mainScreen.domain.useCase.GetListLaunchesUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ListLaunchesViewModel(private val getListLaunchesUseCase: GetListLaunchesUseCase) : ViewModel() {
 
-    private val _listLaunch = MutableLiveData<ListLaunches?>()
-    val listLaunch: LiveData<ListLaunches?> = _listLaunch
+    private val _listLaunch = MutableLiveData<List<LaunchItem>?>()
+    val listLaunch: LiveData<List<LaunchItem>?> = _listLaunch
 
     init {
         getListLaunches()
     }
 
     fun getListLaunches() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             when (val result = getListLaunchesUseCase()) {
                 is ResultGetLaunches.Error -> {
                     Log.i("RESULTAPI", "ERRooorrr ${result.message}")
                 }
+
                 is ResultGetLaunches.Success -> {
+
                     Log.i("RESULTAPI", "SUCCESSS ${result.data}")
-                    _listLaunch.value = result.data
+                    withContext(Dispatchers.Main){
+                        val newList  = result.data.reversed()
+                        _listLaunch.value = newList
+                    }
                 }
             }
         }
     }
+
 }

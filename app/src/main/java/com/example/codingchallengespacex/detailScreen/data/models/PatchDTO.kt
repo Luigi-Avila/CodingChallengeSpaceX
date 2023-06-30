@@ -1,6 +1,6 @@
 package com.example.codingchallengespacex.detailScreen.data.models
 
-data class Patch(
+data class PatchDTO(
     val large: String,
     val small: String
 )
