@@ -12,8 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codingchallengespacex.R
+import com.example.codingchallengespacex.core.utils.ResultState
 import com.example.codingchallengespacex.databinding.FragmentDetailBinding
+import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch
 import com.example.codingchallengespacex.detailscreen.ui.adapter.ListLaunchImagesAdapter
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -44,7 +47,12 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         detailViewModel.launch.observe(viewLifecycleOwner, Observer {
-            it?.let { launchData ->
+            when(it){
+                is ResultState.Error -> { showAlertError() }
+                ResultState.Loading -> {}
+                is ResultState.Success -> { setupView(it.data) }
+            }
+            /*it?.let { launchData ->
                 mBinding.tvDetailName.text = launchData.name
                 mBinding.tvDetailTextDescription.text = launchData.description
                 mBinding.tvDetailDate.text = launchData.date
@@ -57,8 +65,28 @@ class DetailFragment : Fragment() {
                     setupRecyclerView(images)
                 }
                 setupViewLaunchButton(launchData.article)
-            }
+            }*/
         })
+    }
+
+    private fun showAlertError() {
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle("Something went wrong")
+            .setPositiveButton("Ok", null)
+            .show()
+    }
+
+    private fun setupView(detailData: DetailLaunch) {
+        with(mBinding){
+            tvDetailName.text = detailData.name
+            tvDetailDate.text = detailData.date
+            tvDetailTextDescription.text = detailData.description
+            Picasso.get().load(detailData.mainImage).into(imgMissionPhoto)
+        }
+        setupViewLaunchButton(detailData.article)
+        if (!detailData.images.isNullOrEmpty()){
+            setupRecyclerView(detailData.images)
+        }
     }
 
     private fun setupViewLaunchButton(article: String) {

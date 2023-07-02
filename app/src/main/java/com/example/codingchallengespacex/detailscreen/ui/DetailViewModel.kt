@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.codingchallengespacex.core.utils.ResultGetLaunches
+import com.example.codingchallengespacex.core.utils.ResultState
 import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch
 import com.example.codingchallengespacex.detailscreen.domain.useCase.GetOneLaunchUseCase
 import kotlinx.coroutines.Dispatchers
@@ -14,12 +15,19 @@ import kotlinx.coroutines.withContext
 
 class DetailViewModel(private val getOneLaunchUseCase: GetOneLaunchUseCase): ViewModel() {
 
-    private val _launch = MutableLiveData<DetailLaunch?>()
-    val launch: LiveData<DetailLaunch?> = _launch
+    private val _launch = MutableLiveData<ResultState<DetailLaunch>>()
+    val launch: LiveData<ResultState<DetailLaunch>> = _launch
 
     fun getOneLaunch(launchId: String){
         viewModelScope.launch(Dispatchers.IO) {
-            when(val result = getOneLaunchUseCase(launchId)){
+            _launch.postValue(ResultState.Loading)
+            withContext(Dispatchers.Main){
+                getOneLaunchUseCase(launchId).let {
+                    _launch.value = it
+                }
+            }
+
+            /*when(val result = getOneLaunchUseCase(launchId)){
                 is ResultGetLaunches.Error -> {
                     Log.i("Error", "Algo salio mal")
                 }
@@ -29,7 +37,7 @@ class DetailViewModel(private val getOneLaunchUseCase: GetOneLaunchUseCase): Vie
                         _launch.value = result.data
                     }
                 }
-            }
+            }*/
         }
     }
 
