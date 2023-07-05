@@ -1,12 +1,10 @@
 package com.example.codingchallengespacex.detailscreen.ui
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.codingchallengespacex.core.utils.ResultGetLaunches
-import com.example.codingchallengespacex.core.utils.ResultState
+import com.example.codingchallengespacex.core.domain.utils.ResultState
 import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch
 import com.example.codingchallengespacex.detailscreen.domain.useCase.GetOneLaunchUseCase
 import kotlinx.coroutines.Dispatchers
@@ -26,18 +24,6 @@ class DetailViewModel(private val getOneLaunchUseCase: GetOneLaunchUseCase): Vie
                     _launch.value = it
                 }
             }
-
-            /*when(val result = getOneLaunchUseCase(launchId)){
-                is ResultGetLaunches.Error -> {
-                    Log.i("Error", "Algo salio mal")
-                }
-                is ResultGetLaunches.Success -> {
-                    Log.i("Todo chido", "Todo chido ${result.data}")
-                    withContext(Dispatchers.Main){
-                        _launch.value = result.data
-                    }
-                }
-            }*/
         }
     }
 

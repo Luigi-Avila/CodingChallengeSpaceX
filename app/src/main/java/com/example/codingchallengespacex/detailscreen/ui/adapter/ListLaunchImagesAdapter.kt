@@ -4,28 +4,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.codingchallengespacex.R
+import com.example.codingchallengespacex.core.domain.IImageUtils
 import com.example.codingchallengespacex.databinding.LaunchImageItemBinding
-import com.squareup.picasso.Picasso
 
-class ListLaunchImagesAdapter(private val listImages: List<String>): RecyclerView.Adapter<ListLaunchImagesAdapter.ImagesViewHolder>() {
+class ListLaunchImagesAdapter(
+    private val listImages: List<String>,
+    private val imageLoader: IImageUtils
+    ) : RecyclerView.Adapter<ListLaunchImagesAdapter.ImagesViewHolder>() {
 
+    private lateinit var mBinding: LaunchImageItemBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagesViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.launch_image_item, parent, false)
-        return ImagesViewHolder(itemView)
+        mBinding = LaunchImageItemBinding
+            .inflate(
+                LayoutInflater.from(parent.context),
+                parent, false
+            )
+        return ImagesViewHolder(mBinding.root)
     }
 
     override fun onBindViewHolder(holder: ImagesViewHolder, position: Int) {
         val data = listImages[position]
-        with(holder){
-            Picasso.get().load(data).into(binding.imgLaunchGallery)
+        with(mBinding){
+            imageLoader.loadImage(data,imgLaunchGallery)
         }
     }
 
     override fun getItemCount(): Int = listImages.size
 
-    inner class ImagesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val binding = LaunchImageItemBinding.bind(itemView)
-
-    }
+    inner class ImagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 }

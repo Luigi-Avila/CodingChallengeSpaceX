@@ -1,4 +1,4 @@
-package com.example.codingchallengespacex.core.utils
+package com.example.codingchallengespacex.core.domain.utils
 
 import java.text.SimpleDateFormat
 import java.util.Locale

@@ -8,25 +8,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codingchallengespacex.R
-import com.example.codingchallengespacex.core.utils.ResultState
+import com.example.codingchallengespacex.core.domain.IImageUtils
+import com.example.codingchallengespacex.core.domain.utils.ResultState
 import com.example.codingchallengespacex.databinding.FragmentDetailBinding
 import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch
 import com.example.codingchallengespacex.detailscreen.ui.adapter.ListLaunchImagesAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.squareup.picasso.Picasso
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DetailFragment : Fragment() {
+class DetailFragment: Fragment() {
 
     private val args: DetailFragmentArgs by navArgs()
     private val detailViewModel: DetailViewModel by viewModel()
 
     private lateinit var mBinding: FragmentDetailBinding
     private lateinit var launchId: String
+
+    private val imageLoader: IImageUtils by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,27 +48,18 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        detailViewModel.launch.observe(viewLifecycleOwner, Observer {
-            when(it){
-                is ResultState.Error -> { showAlertError() }
-                ResultState.Loading -> {}
-                is ResultState.Success -> { setupView(it.data) }
-            }
-            /*it?.let { launchData ->
-                mBinding.tvDetailName.text = launchData.name
-                mBinding.tvDetailTextDescription.text = launchData.description
-                mBinding.tvDetailDate.text = launchData.date
-                Picasso.get().load(launchData.mainImage).into(mBinding.imgMissionPhoto)
-
-                mBinding.progressbarDetail.visibility = View.GONE
-                mBinding.scrollViewInformation.visibility = View.VISIBLE
-
-                launchData.images?.let { images ->
-                    setupRecyclerView(images)
+        detailViewModel.launch.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResultState.Error -> {
+                    showAlertError()
                 }
-                setupViewLaunchButton(launchData.article)
-            }*/
-        })
+
+                ResultState.Loading -> {}
+                is ResultState.Success -> {
+                    setupView(it.data)
+                }
+            }
+        }
     }
 
     private fun showAlertError() {
@@ -81,7 +74,7 @@ class DetailFragment : Fragment() {
             tvDetailName.text = detailData.name
             tvDetailDate.text = detailData.date
             tvDetailTextDescription.text = detailData.description
-            Picasso.get().load(detailData.mainImage).into(imgMissionPhoto)
+            detailData.mainImage?.let { imageLoader.loadImage(it, imgMissionPhoto) }
         }
         setupViewLaunchButton(detailData.article)
         if (!detailData.images.isNullOrEmpty()){
@@ -106,7 +99,7 @@ class DetailFragment : Fragment() {
 
     private fun setupRecyclerView(images: List<String>) {
         mBinding.recyclerViewImages.apply {
-            adapter = ListLaunchImagesAdapter(images)
+            adapter = ListLaunchImagesAdapter(images, imageLoader)
             layoutManager = LinearLayoutManager(context)
         }
     }

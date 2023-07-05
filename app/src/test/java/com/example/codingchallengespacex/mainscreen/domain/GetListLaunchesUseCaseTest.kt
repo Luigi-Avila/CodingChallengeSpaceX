@@ -1,9 +1,9 @@
 package com.example.codingchallengespacex.mainscreen.domain
 
-import com.example.codingchallengespacex.core.utils.ResultState
+import com.example.codingchallengespacex.core.domain.utils.ResultState
 import com.example.codingchallengespacex.mainscreen.domain.models.LaunchItem
 import com.example.codingchallengespacex.mainscreen.domain.repository.IListLaunchesRepository
-import com.example.codingchallengespacex.mainscreen.domain.useCase.GetListLaunchesUseCase
+import com.example.codingchallengespacex.mainscreen.domain.useCase.GetLaunchesUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
@@ -16,12 +16,12 @@ class GetListLaunchesUseCaseTest {
     @RelaxedMockK
     private lateinit var repository: IListLaunchesRepository
 
-    lateinit var getListLaunchesUseCase: GetListLaunchesUseCase
+    lateinit var getListLaunchesUseCase: GetLaunchesUseCase
 
     @Before
     fun onBefore() {
         MockKAnnotations.init(this)
-        getListLaunchesUseCase = GetListLaunchesUseCase(repository)
+        getListLaunchesUseCase = GetLaunchesUseCase(repository)
     }
 
     @Test

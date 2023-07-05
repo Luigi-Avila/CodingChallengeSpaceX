@@ -1,16 +1,14 @@
 package com.example.codingchallengespacex.mainscreen.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.codingchallengespacex.core.di.viewModelModule
-import com.example.codingchallengespacex.core.utils.ResultState
+import com.example.codingchallengespacex.core.domain.utils.ResultState
 import com.example.codingchallengespacex.mainscreen.domain.models.LaunchItem
-import com.example.codingchallengespacex.mainscreen.domain.useCase.GetListLaunchesUseCase
+import com.example.codingchallengespacex.mainscreen.domain.useCase.GetLaunchesUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
@@ -23,7 +21,7 @@ import org.junit.Test
 class ListLaunchesViewModelTest {
 
     @RelaxedMockK
-    private lateinit var getListLaunchesUseCase: GetListLaunchesUseCase
+    private lateinit var getListLaunchesUseCase: GetLaunchesUseCase
 
     lateinit var listLaunchesViewModel: ListLaunchesViewModel
 

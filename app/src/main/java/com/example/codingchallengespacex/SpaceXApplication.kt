@@ -1,6 +1,7 @@
 package com.example.codingchallengespacex
 
 import android.app.Application
+import com.example.codingchallengespacex.core.di.imageModule
 import com.example.codingchallengespacex.core.di.networkModule
 import com.example.codingchallengespacex.core.di.repositoryModule
 import com.example.codingchallengespacex.core.di.serviceModule
@@ -24,7 +25,8 @@ class SpaceXApplication : Application() {
                 repositoryModule,
                 serviceModule,
                 viewModelModule,
-                useCaseModule
+                useCaseModule,
+                imageModule
             )
         }
     }

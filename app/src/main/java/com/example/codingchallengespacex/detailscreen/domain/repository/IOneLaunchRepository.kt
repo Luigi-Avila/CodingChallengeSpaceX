@@ -1,7 +1,6 @@
 package com.example.codingchallengespacex.detailscreen.domain.repository
 
-import com.example.codingchallengespacex.core.utils.ResultGetLaunches
-import com.example.codingchallengespacex.core.utils.ResultState
+import com.example.codingchallengespacex.core.domain.utils.ResultState
 import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch
 
 interface IOneLaunchRepository {

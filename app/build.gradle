@@ -41,6 +41,7 @@ def lifecycle_version = "2.6.1"
 def activity_version = "1.7.2"
 def nav_version = "2.6.0"
 def koin_android_version = "3.3.2"
+def lottie_version = "6.0.1"
 
 dependencies {
 
@@ -78,6 +79,9 @@ dependencies {
     implementation "io.insert-koin:koin-androidx-workmanager:$koin_android_version"
     // Navigation Graph
     implementation "io.insert-koin:koin-androidx-navigation:$koin_android_version"
+
+    //Lottie
+    implementation "com.airbnb.android:lottie:$lottie_version"
 
     //Test
     testImplementation 'junit:junit:4.13.2'

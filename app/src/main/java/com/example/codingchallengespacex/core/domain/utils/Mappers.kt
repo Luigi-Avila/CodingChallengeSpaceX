@@ -1,4 +1,4 @@
-package com.example.codingchallengespacex.core.utils
+package com.example.codingchallengespacex.core.domain.utils
 
 import com.example.codingchallengespacex.detailscreen.data.models.LaunchDTO
 import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch

@@ -6,4 +6,6 @@
     <string name="main_screen_title">Space X Launches</string>
     <string name="detai_screen_description">Description</string>
     <string name="detail_screen_gallery">Gallery</string>
+    <string name="dialog_title_error">Something went wrong</string>
+    <string name="dialog_positive_button_error">Exit</string>
 </resources>
