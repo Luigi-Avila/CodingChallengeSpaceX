@@ -5,19 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codingchallengespacex.R
 import com.example.codingchallengespacex.core.domain.IImageUtils
-import com.example.codingchallengespacex.core.domain.utils.ResultState
 import com.example.codingchallengespacex.databinding.FragmentMainScreenBinding
 import com.example.codingchallengespacex.mainscreen.domain.models.LaunchItem
-import com.example.codingchallengespacex.mainscreen.ui.adapter.ListLaunchesAdapter
+import com.example.codingchallengespacex.mainscreen.ui.compose.MainScreen
+import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainScreenFragment : Fragment(){
+class MainScreenFragment : Fragment() {
 
     private lateinit var mBinding: FragmentMainScreenBinding
     private val listLaunchesViewModel: ListLaunchesViewModel by viewModel()
@@ -28,15 +28,30 @@ class MainScreenFragment : Fragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        mBinding = FragmentMainScreenBinding.inflate(inflater, container, false)
+        //This is for the compose view
+        mBinding = FragmentMainScreenBinding.inflate(inflater, container, false).apply {
+            composeView.apply {
+                /*
+                Dispose the Composition when the view's LifecycleOwner is destroyed
+                 it's best practice to always set this strategy when using ComposeView in fragments.
+                */
+                setViewCompositionStrategy(
+                    ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
+                )
+                setContent {
+                    MdcTheme {
+                        MainScreen(listLaunchesViewModel)
+                    }
+                }
+            }
+        }
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        listLaunchesViewModel.listLaunch.observe(viewLifecycleOwner) {
+        /*listLaunchesViewModel.listLaunch.observe(viewLifecycleOwner) {
             when(it){
                 is ResultState.Error -> {
                     showDialog()
@@ -49,7 +64,7 @@ class MainScreenFragment : Fragment(){
                 }
             }
 
-        }
+        }*/
 
     }
 
@@ -59,8 +74,8 @@ class MainScreenFragment : Fragment(){
     }
 
     private fun setupRecyclerView(launches: List<LaunchItem>) {
-        mBinding.recyclerView.adapter = ListLaunchesAdapter(launches, this::onClick, imageLoader)
-        mBinding.recyclerView.layoutManager = LinearLayoutManager(context)
+        /*mBinding.recyclerView.adapter = ListLaunchesAdapter(launches, this::onClick, imageLoader)
+        mBinding.recyclerView.layoutManager = LinearLayoutManager(context)*/
     }
 
     private fun showDialog() {
@@ -73,7 +88,8 @@ class MainScreenFragment : Fragment(){
     }
 
     private fun onClick(launchId: String) {
-        val direction = MainScreenFragmentDirections.actionMainScreenFragmentToDetailFragment2(launchId)
+        val direction =
+            MainScreenFragmentDirections.actionMainScreenFragmentToDetailFragment2(launchId)
         findNavController().navigate(direction)
     }
 }
