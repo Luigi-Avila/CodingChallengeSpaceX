@@ -26,11 +26,11 @@ import com.example.codingchallengespacex.R
 import com.example.codingchallengespacex.mainscreen.domain.models.LaunchItem
 
 @Composable
-fun MainScreenSuccessState(launches: List<LaunchItem>) {
+fun MainScreenSuccessState(launches: List<LaunchItem>, goToDetails: (String) -> Unit) {
     LazyColumn() {
         item { Title() }
         items(launches) { launch ->
-            LaunchItemView(launch)
+            LaunchItemView(launch, goToDetails)
         }
     }
 
@@ -38,12 +38,13 @@ fun MainScreenSuccessState(launches: List<LaunchItem>) {
 }
 
 @Composable
-fun LaunchItemView(launch: LaunchItem) {
+fun LaunchItemView(launch: LaunchItem, goToDetails: (String) -> Unit) {
     Card(
         Modifier
             .fillMaxWidth()
-            .padding(top = dimensionResource(id = R.dimen.common_padding_min)).clickable {
-
+            .padding(top = dimensionResource(id = R.dimen.common_padding_min))
+            .clickable {
+                goToDetails(launch.id)
             },
         elevation = 8.dp,
         shape = MaterialTheme.shapes.small,
@@ -61,6 +62,7 @@ fun LaunchItemView(launch: LaunchItem) {
                     .fillMaxHeight(),
                 contentScale = ContentScale.Fit,
                 placeholder = painterResource(id = R.drawable.spacex_logo),
+                error = painterResource(id = R.drawable.spacex_logo),
                 alignment = Alignment.Center
             )
             Column(Modifier.fillMaxHeight(), verticalArrangement = Arrangement.Center) {

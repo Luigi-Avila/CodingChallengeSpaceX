@@ -16,7 +16,6 @@ class ListLaunchesService(private val apiClient: ListLaunchesClient) {
             } catch (e: Exception){
                 ResultState.Error(e.message.toString())
             }
-
         }
     }
 }

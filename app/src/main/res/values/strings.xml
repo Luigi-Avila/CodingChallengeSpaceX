@@ -10,4 +10,5 @@
     <string name="dialog_positive_button_error">Exit</string>
     <string name="photo_mission_description">Photo of the mission</string>
     <string name="dialog_title_loading">Loading launches…</string>
+    <string name="error_refresh">Refresh</string>
 </resources>

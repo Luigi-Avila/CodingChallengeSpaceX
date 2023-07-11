@@ -1,124 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.compose.ui.platform.ComposeView
+    android:id="@+id/detailsComposeView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/common_padding_default"
-    tools:context=".detailscreen.ui.DetailFragment">
+    tools:context=".detailscreen.ui.DetailFragment" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <!--
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/common_padding_default"
+        tools:context=".detailscreen.ui.DetailFragment">
 
-        <TextView
-            android:id="@+id/tvDetailName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadlineMedium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Nombre de la mision" />
-
-        <TextView
-            android:id="@+id/tvDetailDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_padding_min"
-            app:layout_constraintEnd_toEndOf="@id/tvDetailName"
-            app:layout_constraintStart_toStartOf="@id/tvDetailName"
-            app:layout_constraintTop_toBottomOf="@id/tvDetailName"
-            tools:text="fecha" />
-
-
-        <ImageView
-            android:id="@+id/imgMissionPhoto"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/common_padding_default"
-            android:importantForAccessibility="no"
-            android:src="@drawable/spacex_logo"
-            app:layout_constraintDimensionRatio="H, 4:3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDetailDate" />
+            android:layout_height="match_parent">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardLaunchDescription"
-            style="@style/Widget.Material3.CardView.Elevated"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_padding_default"
-            app:layout_constraintEnd_toEndOf="@id/imgMissionPhoto"
-            app:layout_constraintStart_toStartOf="@id/imgMissionPhoto"
-            app:layout_constraintTop_toBottomOf="@id/imgMissionPhoto">
+            <TextView
+                android:id="@+id/tvDetailName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadlineMedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Nombre de la mision" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/tvDetailDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_padding_min"
+                app:layout_constraintEnd_toEndOf="@id/tvDetailName"
+                app:layout_constraintStart_toStartOf="@id/tvDetailName"
+                app:layout_constraintTop_toBottomOf="@id/tvDetailName"
+                tools:text="fecha" />
+
+
+            <ImageView
+                android:id="@+id/imgMissionPhoto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/common_padding_default">
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/common_padding_default"
+                android:importantForAccessibility="no"
+                android:src="@drawable/spacex_logo"
+                app:layout_constraintDimensionRatio="H, 4:3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDetailDate" />
 
-                <TextView
-                    android:id="@+id/tvDetailTitleDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/detai_screen_description"
-                    android:textAppearance="?attr/textAppearanceSubtitle2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardLaunchDescription"
+                style="@style/Widget.Material3.CardView.Elevated"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_padding_default"
+                app:layout_constraintEnd_toEndOf="@id/imgMissionPhoto"
+                app:layout_constraintStart_toStartOf="@id/imgMissionPhoto"
+                app:layout_constraintTop_toBottomOf="@id/imgMissionPhoto">
 
-                <ImageButton
-                    android:id="@+id/btnViewLaunch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/ic_rocket_launch"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/common_padding_default">
 
-                <TextView
-                    android:id="@+id/tvDetailTextDescription"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/common_padding_default"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/tvDetailTitleDescription"
-                    app:layout_constraintTop_toBottomOf="@id/tvDetailTitleDescription"
-                    tools:text="Esto es un texto de prueba" />
+                    <TextView
+                        android:id="@+id/tvDetailTitleDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detai_screen_description"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageButton
+                        android:id="@+id/btnViewLaunch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_rocket_launch"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:id="@+id/tvDetailTextDescription"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_padding_default"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tvDetailTitleDescription"
+                        app:layout_constraintTop_toBottomOf="@id/tvDetailTitleDescription"
+                        tools:text="Esto es un texto de prueba" />
 
-        <TextView
-            android:id="@+id/tvTitleGallery"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_padding_default"
-            android:text="@string/detail_screen_gallery"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardLaunchDescription"
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            />
+            </com.google.android.material.card.MaterialCardView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewImages"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_padding_default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitleGallery"
-            tools:listitem="@layout/launch_image_item" />
+            <TextView
+                android:id="@+id/tvTitleGallery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_padding_default"
+                android:text="@string/detail_screen_gallery"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardLaunchDescription"
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                />
 
-</androidx.core.widget.NestedScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewImages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_padding_default"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleGallery"
+                tools:listitem="@layout/launch_image_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    -->
 
 

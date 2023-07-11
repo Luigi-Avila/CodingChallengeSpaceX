@@ -2,14 +2,13 @@ package com.example.codingchallengespacex.mainscreen.ui.compose
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import com.example.codingchallengespacex.R
+import com.example.codingchallengespacex.core.compose.states.ErrorState
 import com.example.codingchallengespacex.core.domain.utils.ResultState
 import com.example.codingchallengespacex.mainscreen.domain.models.LaunchItem
 import com.example.codingchallengespacex.mainscreen.ui.ListLaunchesViewModel
@@ -18,7 +17,11 @@ import com.example.codingchallengespacex.mainscreen.ui.compose.states.MainScreen
 
 
 @Composable
-fun MainScreen(launchesViewModel: ListLaunchesViewModel) {
+fun MainScreen(
+    launchesViewModel: ListLaunchesViewModel,
+    goToDetails: (String) -> Unit,
+    showErrorToast: (String) -> Unit
+) {
 
     val listState: ResultState<List<LaunchItem>> by launchesViewModel.listLaunch.observeAsState(
         initial = ResultState.Loading
@@ -35,7 +38,8 @@ fun MainScreen(launchesViewModel: ListLaunchesViewModel) {
     ) {
         when (listState) {
             is ResultState.Error -> {
-                ErrorState()
+                ErrorState { launchesViewModel.getListLaunches() }
+                showErrorToast((listState as ResultState.Error).errorMessage)
             }
 
             ResultState.Loading -> {
@@ -43,7 +47,7 @@ fun MainScreen(launchesViewModel: ListLaunchesViewModel) {
             }
 
             is ResultState.Success -> {
-                MainScreenSuccessState((listState as ResultState.Success<List<LaunchItem>>).data)
+                MainScreenSuccessState((listState as ResultState.Success<List<LaunchItem>>).data, goToDetails)
             }
         }
     }
@@ -52,7 +56,5 @@ fun MainScreen(launchesViewModel: ListLaunchesViewModel) {
 }
 
 
-@Composable
-fun ErrorState() {
-    Text(text = stringResource(id = R.string.dialog_title_error))
-}
+
+
