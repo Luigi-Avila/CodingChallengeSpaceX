@@ -12,6 +12,9 @@
         <argument
             android:name="launchId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_detailFragment2_to_mainScreenFragment"
+            app:destination="@id/mainScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"

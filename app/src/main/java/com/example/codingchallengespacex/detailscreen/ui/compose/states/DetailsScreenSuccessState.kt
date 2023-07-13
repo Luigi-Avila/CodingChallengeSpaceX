@@ -26,7 +26,11 @@ import com.example.codingchallengespacex.R
 import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch
 
 @Composable
-fun DetailsScreenSuccessState(launch: DetailLaunch, goToBrowser: (String) -> Unit) {
+fun DetailsScreenSuccessState(
+    launch: DetailLaunch,
+    goToBrowser: (String) -> Unit,
+    getTitle: (String) -> Unit
+) {
 
     LazyColumn(
         Modifier
@@ -34,7 +38,8 @@ fun DetailsScreenSuccessState(launch: DetailLaunch, goToBrowser: (String) -> Uni
             .padding(dimensionResource(id = R.dimen.common_padding_default))
     ) {
         item {
-            Header(name = launch.name, dateTime = launch.date)
+            Text(text = launch.date)
+            getTitle(launch.name)
         }
         item {
             launch.mainImage?.let { url ->
@@ -55,8 +60,9 @@ fun DetailsScreenSuccessState(launch: DetailLaunch, goToBrowser: (String) -> Uni
                     model = image,
                     modifier = Modifier.padding(top = dimensionResource(id = R.dimen.common_padding_default)),
                     contentDescription = stringResource(id = R.string.detail_screen_gallery),
-                    placeholder = painterResource(id = R.drawable.spacex_logo)
-                )
+                    placeholder = painterResource(id = R.drawable.spacex_logo),
+                    error = painterResource(id = R.drawable.spacex_logo)
+                    )
 
             }
         }
@@ -122,16 +128,5 @@ fun CardDetail(description: String, articleUrl: String, goToBrowser: (String) ->
             Text(text = description)
         }
 
-    }
-}
-
-@Composable
-fun Header(name: String, dateTime: String) {
-    Column(Modifier.fillMaxWidth()) {
-        Text(text = name, style = MaterialTheme.typography.h5)
-        Text(
-            text = dateTime,
-            Modifier.padding(top = dimensionResource(id = R.dimen.common_padding_min))
-        )
     }
 }

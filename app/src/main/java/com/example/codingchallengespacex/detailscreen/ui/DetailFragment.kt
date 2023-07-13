@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.codingchallengespacex.R
 import com.example.codingchallengespacex.databinding.FragmentDetailBinding
@@ -24,9 +25,9 @@ class DetailFragment : Fragment() {
     private lateinit var mBinding: FragmentDetailBinding
     private lateinit var launchId: String
 
-/*
-    private val imageLoader: IImageUtils by inject()
-*/
+    /*
+        private val imageLoader: IImageUtils by inject()
+    */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +47,12 @@ class DetailFragment : Fragment() {
                 )
                 setContent {
                     MdcTheme {
-                        DetailsScreen(detailViewModel = detailViewModel, this@DetailFragment::goToInternet)
+                        DetailsScreen(
+                            detailViewModel = detailViewModel,
+                            this@DetailFragment::goToInternet,
+                            launchId,
+                            this@DetailFragment::goToList
+                        )
                     }
                 }
             }
@@ -73,14 +79,14 @@ class DetailFragment : Fragment() {
     
      */
 
-/*
-    private fun showAlertError() {
-        MaterialAlertDialogBuilder(requireActivity())
-            .setTitle("Something went wrong")
-            .setPositiveButton("Ok", null)
-            .show()
-    }
-*/
+    /*
+        private fun showAlertError() {
+            MaterialAlertDialogBuilder(requireActivity())
+                .setTitle("Something went wrong")
+                .setPositiveButton("Ok", null)
+                .show()
+        }
+    */
 
     /* private fun setupView(detailData: DetailLaunch) {
          with(mBinding){
@@ -113,6 +119,10 @@ class DetailFragment : Fragment() {
             Toast.makeText(context, R.string.intent_error, Toast.LENGTH_LONG).show()
         }
 
+    }
+
+    private fun goToList() {
+        findNavController().popBackStack()
     }
 
 }
