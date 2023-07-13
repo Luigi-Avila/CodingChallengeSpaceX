@@ -5,8 +5,9 @@ import com.example.codingchallengespacex.core.domain.utils.toDomain
 import com.example.codingchallengespacex.mainscreen.domain.models.LaunchItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class ListLaunchesService(private val apiClient: ListLaunchesClient) {
+class ListLaunchesService @Inject constructor(private val apiClient: ListLaunchesClient) {
 
     suspend fun getListLaunches(): ResultState<List<LaunchItem>> {
         return withContext(Dispatchers.IO){

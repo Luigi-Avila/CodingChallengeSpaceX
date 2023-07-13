@@ -7,18 +7,20 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.codingchallengespacex.databinding.FragmentMainScreenBinding
 import com.example.codingchallengespacex.mainscreen.ui.compose.MainScreen
 import com.google.accompanist.themeadapter.material.MdcTheme
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainScreenFragment : Fragment() {
 
     /*The comments in the code is for the migration from xml to compose*/
 
     private lateinit var mBinding: FragmentMainScreenBinding
-    private val listLaunchesViewModel: ListLaunchesViewModel by viewModel()
+    private val listLaunchesViewModel: ListLaunchesViewModel by viewModels()
 
 /*
     private val imageLoader: IImageUtils by inject()

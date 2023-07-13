@@ -9,18 +9,20 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.codingchallengespacex.R
 import com.example.codingchallengespacex.databinding.FragmentDetailBinding
 import com.example.codingchallengespacex.detailscreen.ui.compose.DetailsScreen
 import com.google.accompanist.themeadapter.material.MdcTheme
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     private val args: DetailFragmentArgs by navArgs()
-    private val detailViewModel: DetailViewModel by viewModel()
+    private val detailViewModel: DetailViewModel by viewModels()
 
     private lateinit var mBinding: FragmentDetailBinding
     private lateinit var launchId: String

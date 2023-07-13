@@ -6,8 +6,9 @@ import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import javax.inject.Inject
 
-class OneLaunchService(private val apiClient: OneLaunchClient) {
+class OneLaunchService @Inject constructor(private val apiClient: OneLaunchClient) {
 
     suspend fun getOneLaunch(launchId: String): ResultState<DetailLaunch> {
         return withContext(Dispatchers.IO){
