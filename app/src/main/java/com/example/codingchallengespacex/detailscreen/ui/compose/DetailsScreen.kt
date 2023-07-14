@@ -66,12 +66,10 @@ fun DetailsScreen(
                 is ResultState.Success -> {
                     DetailsScreenSuccessState(
                         (detailState as ResultState.Success<DetailLaunch>).data,
-                        goToBrowser,
-                        getTitle = {
-                            title = it
-                        }
-
-                    )
+                        goToBrowser
+                    ) {
+                        title = it
+                    }
                 }
             }
         }
