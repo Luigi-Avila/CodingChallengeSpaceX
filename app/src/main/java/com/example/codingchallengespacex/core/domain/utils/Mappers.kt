@@ -11,7 +11,9 @@ fun LaunchesItemDTO.toDomain(): LaunchItem {
         name= this.name,
         date_utc = this.date_utc.dateTimeFormat(),
         id = this.id,
-        image = this.links.patch.small
+        image = this.links.patch.small,
+        hasGallery = this.links.flickr.original.size > 0,
+        hasDescription = !this.details.isNullOrBlank()
     )
 }
 

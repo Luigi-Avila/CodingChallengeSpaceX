@@ -47,7 +47,11 @@ fun MainScreen(
             }
 
             is ResultState.Success -> {
-                MainScreenSuccessState((listState as ResultState.Success<List<LaunchItem>>).data, goToDetails)
+                MainScreenSuccessState(
+                    (listState as ResultState.Success<List<LaunchItem>>).data,
+                    goToDetails,
+                    launchesViewModel
+                )
             }
         }
     }

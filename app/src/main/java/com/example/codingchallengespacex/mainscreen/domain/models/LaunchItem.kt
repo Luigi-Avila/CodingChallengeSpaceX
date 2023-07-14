@@ -5,5 +5,7 @@ data class LaunchItem(
     val details: String? = "",
     val name: String = "",
     val date_utc: String = "",
-    val id: String = ""
+    val id: String = "",
+    val hasGallery: Boolean = false,
+    val hasDescription: Boolean = false
 )
