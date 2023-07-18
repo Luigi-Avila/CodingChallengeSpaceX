@@ -6,5 +6,6 @@ data class DetailLaunch(
     val description: String? = "",
     val images: List<String>? = emptyList(),
     val mainImage: String? = "",
-    val article: String = ""
+    val article: String = "",
+    val id: String = ""
 )

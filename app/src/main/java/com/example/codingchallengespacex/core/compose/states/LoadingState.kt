@@ -1,4 +1,4 @@
-package com.example.codingchallengespacex.detailscreen.ui.compose.states
+package com.example.codingchallengespacex.core.compose.states
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -15,7 +15,7 @@ import com.example.codingchallengespacex.R
 
 
 @Composable
-fun DetailsScreenLoadingState() {
+fun LoadingState() {
     DetailDialogLoading()
 }
 

@@ -53,7 +53,8 @@ class DetailFragment : Fragment() {
                             detailViewModel = detailViewModel,
                             this@DetailFragment::goToInternet,
                             launchId,
-                            this@DetailFragment::goToList
+                            this@DetailFragment::goToList,
+                            this@DetailFragment::goToGallery
                         )
                     }
                 }
@@ -125,6 +126,11 @@ class DetailFragment : Fragment() {
 
     private fun goToList() {
         findNavController().popBackStack()
+    }
+
+    private fun goToGallery(launchId: String) {
+        val direction = DetailFragmentDirections.actionDetailFragment2ToGalleryFragment2(launchId)
+        findNavController().navigate(direction)
     }
 
 }

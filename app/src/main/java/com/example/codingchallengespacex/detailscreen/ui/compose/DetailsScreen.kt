@@ -19,10 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.codingchallengespacex.R
 import com.example.codingchallengespacex.core.compose.states.ErrorState
+import com.example.codingchallengespacex.core.compose.states.LoadingState
 import com.example.codingchallengespacex.core.domain.utils.ResultState
 import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch
 import com.example.codingchallengespacex.detailscreen.ui.DetailViewModel
-import com.example.codingchallengespacex.detailscreen.ui.compose.states.DetailsScreenLoadingState
 import com.example.codingchallengespacex.detailscreen.ui.compose.states.DetailsScreenSuccessState
 
 
@@ -31,7 +31,8 @@ fun DetailsScreen(
     detailViewModel: DetailViewModel,
     goToBrowser: (String) -> Unit,
     launchId: String,
-    goBack: () -> Unit
+    goBack: () -> Unit,
+    goToGallery: (String) -> Unit
 ) {
 
     val detailState: ResultState<DetailLaunch> by detailViewModel.launch.observeAsState(
@@ -60,16 +61,14 @@ fun DetailsScreen(
                 }
 
                 ResultState.Loading -> {
-                    DetailsScreenLoadingState()
+                    LoadingState()
                 }
 
                 is ResultState.Success -> {
                     DetailsScreenSuccessState(
                         (detailState as ResultState.Success<DetailLaunch>).data,
-                        goToBrowser
-                    ) {
-                        title = it
-                    }
+                        goToBrowser, getTitle = { title = it }, goToGallery
+                    )
                 }
             }
         }

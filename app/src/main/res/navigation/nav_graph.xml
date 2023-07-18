@@ -8,21 +8,34 @@
         android:id="@+id/detailFragment2"
         android:name="com.example.codingchallengespacex.detailscreen.ui.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" >
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="launchId"
             app:argType="string" />
         <action
             android:id="@+id/action_detailFragment2_to_mainScreenFragment"
             app:destination="@id/mainScreenFragment" />
+        <action android:id="@+id/action_detailFragment2_to_galleryFragment" />
+        <action
+            android:id="@+id/action_detailFragment2_to_galleryFragment2"
+            app:destination="@id/galleryFragment2" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
         android:name="com.example.codingchallengespacex.mainscreen.ui.MainScreenFragment"
         android:label="fragment_main_screen"
-        tools:layout="@layout/fragment_main_screen" >
+        tools:layout="@layout/fragment_main_screen">
         <action
             android:id="@+id/action_mainScreenFragment_to_detailFragment2"
             app:destination="@id/detailFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/galleryFragment2"
+        android:name="com.example.codingchallengespacex.galleryScreen.ui.GalleryFragment"
+        android:label="fragment_gallery"
+        tools:layout="@layout/fragment_gallery" >
+        <argument
+            android:name="galleryId"
+            app:argType="string" />
     </fragment>
 </navigation>

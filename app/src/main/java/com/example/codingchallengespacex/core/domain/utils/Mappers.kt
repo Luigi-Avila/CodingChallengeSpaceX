@@ -23,6 +23,7 @@ fun LaunchDTO.toDomainDetail(): DetailLaunch {
         date = this.date_utc.dateTimeFormat(),
         description = this.details,
         images = this.links.flickr.original,
-        mainImage = this.links.patch.small
+        mainImage = this.links.patch.small,
+        id = this.id
     )
 }

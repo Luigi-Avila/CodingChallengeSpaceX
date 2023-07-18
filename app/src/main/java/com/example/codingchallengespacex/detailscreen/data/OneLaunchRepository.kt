@@ -6,8 +6,12 @@ import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch
 import com.example.codingchallengespacex.detailscreen.domain.repository.IOneLaunchRepository
 import javax.inject.Inject
 
-class OneLaunchRepository @Inject constructor(private val service: OneLaunchService) : IOneLaunchRepository {
+class OneLaunchRepository @Inject constructor(private val service: OneLaunchService) :
+    IOneLaunchRepository {
 
     override suspend fun getOneLaunch(launchId: String): ResultState<DetailLaunch> =
         service.getOneLaunch(launchId)
+
+    override suspend fun getGallery(galleryId: String): ResultState<List<String>> =
+        service.getGallery(galleryId)
 }

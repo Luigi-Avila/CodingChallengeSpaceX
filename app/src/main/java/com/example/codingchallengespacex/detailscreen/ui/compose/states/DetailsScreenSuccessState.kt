@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -30,15 +32,19 @@ import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch
 fun DetailsScreenSuccessState(
     launchData: DetailLaunch,
     goToBrowser: (String) -> Unit,
-    getTitle: (String) -> Unit
+    getTitle: (String) -> Unit,
+    goToGallery: (String) -> Unit
 ) {
     getTitle(launchData.name)
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
             .padding(
                 dimensionResource(id = R.dimen.common_padding_default)
             )
-            .fillMaxSize(), verticalArrangement = Arrangement.Center
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+        , verticalArrangement = Arrangement.Center
     ) {
         Text(text = launchData.name, style = MaterialTheme.typography.h5)
         Text(
@@ -57,7 +63,7 @@ fun DetailsScreenSuccessState(
             alignment = Alignment.Center
         )
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { goToGallery(launchData.id) },
             shape = RoundedCornerShape(dimensionResource(id = R.dimen.common_padding_min))
         ) {
             Icon(

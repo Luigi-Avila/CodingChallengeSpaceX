@@ -5,4 +5,6 @@ import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch
 
 interface IOneLaunchRepository {
     suspend fun getOneLaunch(launchId: String): ResultState<DetailLaunch>
+
+    suspend fun getGallery(launchId: String): ResultState<List<String>>
 }

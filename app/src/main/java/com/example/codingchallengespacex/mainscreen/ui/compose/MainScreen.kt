@@ -12,7 +12,7 @@ import com.example.codingchallengespacex.core.compose.states.ErrorState
 import com.example.codingchallengespacex.core.domain.utils.ResultState
 import com.example.codingchallengespacex.mainscreen.domain.models.LaunchItem
 import com.example.codingchallengespacex.mainscreen.ui.ListLaunchesViewModel
-import com.example.codingchallengespacex.mainscreen.ui.compose.states.MainScreenLoadingState
+import com.example.codingchallengespacex.core.compose.states.LoadingState
 import com.example.codingchallengespacex.mainscreen.ui.compose.states.MainScreenSuccessState
 
 
@@ -43,7 +43,7 @@ fun MainScreen(
             }
 
             ResultState.Loading -> {
-                MainScreenLoadingState()
+                LoadingState()
             }
 
             is ResultState.Success -> {
