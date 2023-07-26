@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.codingchallengespacex.core.domain.utils.ResultState
+import com.example.codingchallengespacex.core.domain.utils.UIState
 import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch
 import com.example.codingchallengespacex.detailscreen.domain.useCase.GetOneLaunchUseCase
 import com.example.codingchallengespacex.galleryScreen.domain.usecase.GetGalleryUseCase
@@ -21,15 +21,15 @@ class DetailViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    private val _launch = MutableLiveData<ResultState<DetailLaunch>>()
-    val launch: LiveData<ResultState<DetailLaunch>> = _launch
+    private val _launch = MutableLiveData<UIState<DetailLaunch>>()
+    val launch: LiveData<UIState<DetailLaunch>> = _launch
 
-    private val _images = MutableLiveData<ResultState<List<String>>> ()
-    val images: LiveData<ResultState<List<String>>> = _images
+    private val _images = MutableLiveData<UIState<List<String>>> ()
+    val images: LiveData<UIState<List<String>>> = _images
 
     fun getOneLaunch(launchId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _launch.postValue(ResultState.Loading)
+            _launch.postValue(UIState.Loading)
             withContext(Dispatchers.Main) {
                 getOneLaunchUseCase(launchId).let {
                     _launch.value = it
@@ -40,7 +40,7 @@ class DetailViewModel @Inject constructor(
 
     fun getGallery(galleryId: String){
         viewModelScope.launch(Dispatchers.IO) {
-            _images.postValue(ResultState.Loading)
+            _images.postValue(UIState.Loading)
             withContext(Dispatchers.Main){
                getGalleryUseCase(galleryId).let {
                    _images.value = it

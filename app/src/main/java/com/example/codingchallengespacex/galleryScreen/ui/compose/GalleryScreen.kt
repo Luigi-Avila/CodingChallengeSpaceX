@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import com.example.codingchallengespacex.core.compose.states.LoadingState
-import com.example.codingchallengespacex.core.domain.utils.ResultState
+import com.example.codingchallengespacex.core.domain.utils.UIState
 import com.example.codingchallengespacex.detailscreen.ui.DetailViewModel
 import com.example.codingchallengespacex.galleryScreen.ui.compose.states.GalleryScreenSuccessState
 
@@ -18,16 +18,16 @@ fun GalleryScreen(
     nextPhoto: suspend (PagerState, Int) -> Unit
 ) {
 
-    val galleryState: ResultState<List<String>> by detailViewModel.images.observeAsState(initial = ResultState.Loading)
+    val galleryState: UIState<List<String>> by detailViewModel.images.observeAsState(initial = UIState.Loading)
 
     when (galleryState) {
-        is ResultState.Error -> {}
-        ResultState.Loading -> {
+        is UIState.Error -> {}
+        UIState.Loading -> {
             LoadingState()
         }
 
-        is ResultState.Success -> {
-            GalleryScreenSuccessState(images = (galleryState as ResultState.Success<List<String>>).data, goBack, nextPhoto)
+        is UIState.Success -> {
+            GalleryScreenSuccessState(images = (galleryState as UIState.Success<List<String>>).data, goBack, nextPhoto)
         }
     }
 

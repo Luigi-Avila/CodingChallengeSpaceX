@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.example.codingchallengespacex.R
 import com.example.codingchallengespacex.core.compose.states.ErrorState
-import com.example.codingchallengespacex.core.domain.utils.ResultState
+import com.example.codingchallengespacex.core.domain.utils.UIState
 import com.example.codingchallengespacex.mainscreen.domain.models.LaunchItem
 import com.example.codingchallengespacex.mainscreen.ui.ListLaunchesViewModel
 import com.example.codingchallengespacex.core.compose.states.LoadingState
@@ -23,8 +23,8 @@ fun MainScreen(
     showErrorToast: (String) -> Unit
 ) {
 
-    val listState: ResultState<List<LaunchItem>> by launchesViewModel.listLaunch.observeAsState(
-        initial = ResultState.Loading
+    val listState: UIState<List<LaunchItem>> by launchesViewModel.listLaunch.observeAsState(
+        initial = UIState.Loading
     )
 
     Box(
@@ -37,18 +37,18 @@ fun MainScreen(
             )
     ) {
         when (listState) {
-            is ResultState.Error -> {
+            is UIState.Error -> {
                 ErrorState { launchesViewModel.getListLaunches() }
-                showErrorToast((listState as ResultState.Error).errorMessage)
+                showErrorToast((listState as UIState.Error).errorMessage)
             }
 
-            ResultState.Loading -> {
+            UIState.Loading -> {
                 LoadingState()
             }
 
-            is ResultState.Success -> {
+            is UIState.Success -> {
                 MainScreenSuccessState(
-                    (listState as ResultState.Success<List<LaunchItem>>).data,
+                    (listState as UIState.Success<List<LaunchItem>>).data,
                     goToDetails,
                     launchesViewModel
                 )

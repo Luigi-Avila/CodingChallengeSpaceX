@@ -5,7 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.codingchallengespacex.core.domain.utils.ResultState
+import com.example.codingchallengespacex.core.domain.utils.ResultAPI
+import com.example.codingchallengespacex.core.domain.utils.UIState
 import com.example.codingchallengespacex.mainscreen.domain.models.LaunchItem
 import com.example.codingchallengespacex.mainscreen.domain.useCase.GetLaunchesDescriptionUseCase
 import com.example.codingchallengespacex.mainscreen.domain.useCase.GetLaunchesGalleryUseCase
@@ -24,31 +25,37 @@ class ListLaunchesViewModel @Inject constructor (
 ) : ViewModel() {
 
     @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
-    internal val _listLaunch = MutableLiveData<ResultState<List<LaunchItem>>>()
-    val listLaunch: LiveData<ResultState<List<LaunchItem>>> = _listLaunch
+    internal val _listLaunch = MutableLiveData<UIState<List<LaunchItem>>>()
+    val listLaunch: LiveData<UIState<List<LaunchItem>>> = _listLaunch
 
     init {
         getListLaunches()
+        _listLaunch.postValue(UIState.Loading)
     }
 
     fun getListLaunches() {
         viewModelScope.launch(Dispatchers.IO) {
-            _listLaunch.postValue(ResultState.Loading)
+/*
+            _listLaunch.postValue(UIState.Loading)
+*/
             withContext(Dispatchers.Main){
-                getListLaunchesUseCase().let {
-                    _listLaunch.value = it
+                when(val result = getListLaunchesUseCase()){
+                    is ResultAPI.Error -> { _listLaunch.value = UIState.Error(result.message)}
+                    is ResultAPI.Success -> {
+                        _listLaunch.value = UIState.Success(result.data)
+                    }
                 }
             }
         }
     }
 
     fun filterByLaunchGallery(launches: List<LaunchItem>){
-        _listLaunch.value = ResultState.Loading
+        _listLaunch.value = UIState.Loading
         _listLaunch.value = getLaunchesGalleryUseCase(launches)
     }
 
     fun filterByLaunchDescription(launches: List<LaunchItem>){
-        _listLaunch.value = ResultState.Loading
+        _listLaunch.value = UIState.Loading
         _listLaunch.value = getLaunchesDescriptionUseCase(launches)
     }
 

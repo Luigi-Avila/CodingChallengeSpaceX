@@ -20,7 +20,7 @@ import androidx.compose.ui.res.stringResource
 import com.example.codingchallengespacex.R
 import com.example.codingchallengespacex.core.compose.states.ErrorState
 import com.example.codingchallengespacex.core.compose.states.LoadingState
-import com.example.codingchallengespacex.core.domain.utils.ResultState
+import com.example.codingchallengespacex.core.domain.utils.UIState
 import com.example.codingchallengespacex.detailscreen.domain.models.DetailLaunch
 import com.example.codingchallengespacex.detailscreen.ui.DetailViewModel
 import com.example.codingchallengespacex.detailscreen.ui.compose.states.DetailsScreenSuccessState
@@ -35,8 +35,8 @@ fun DetailsScreen(
     goToGallery: (String) -> Unit
 ) {
 
-    val detailState: ResultState<DetailLaunch> by detailViewModel.launch.observeAsState(
-        initial = ResultState.Loading
+    val detailState: UIState<DetailLaunch> by detailViewModel.launch.observeAsState(
+        initial = UIState.Loading
     )
     var title by rememberSaveable { mutableStateOf("Back") }
 
@@ -54,19 +54,19 @@ fun DetailsScreen(
     }) { contentPadding ->
         Box(modifier = Modifier.padding(contentPadding)) {
             when (detailState) {
-                is ResultState.Error -> {
+                is UIState.Error -> {
                     ErrorState {
                         detailViewModel.getOneLaunch(launchId)
                     }
                 }
 
-                ResultState.Loading -> {
+                UIState.Loading -> {
                     LoadingState()
                 }
 
-                is ResultState.Success -> {
+                is UIState.Success -> {
                     DetailsScreenSuccessState(
-                        (detailState as ResultState.Success<DetailLaunch>).data,
+                        (detailState as UIState.Success<DetailLaunch>).data,
                         goToBrowser, getTitle = { title = it }, goToGallery
                     )
                 }
